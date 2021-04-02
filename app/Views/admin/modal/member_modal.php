@@ -62,15 +62,14 @@
             <input name="nama_member" value="<?= $m['nama_member'] ?>" class="form-control" required>
             <label class="my-1">Alamat</label>
             <input name="alamat_member" value="<?= $m['alamat_member'] ?>" class="form-control" required>
+
+            <label class="my-1">Jenis Kelamin</label>
             <select name="jenis_kelamin" class="form-control">
               <option value="">-</option>
-
-              <?php foreach ($member as $m) : ?>
-
-                <option value="<?= $m['jenis_kelamin'] ?>"><?= $m['jenis_kelamin'] ?></option>
-
-              <?php endforeach; ?>
+              <option value="l">Laki-Laki</option>
+              <option value="p">Perempuan</option>
             </select>
+
             <label class="my-1">Telepon</label>
             <input name="telp_member" value="<?= $m['telp_member'] ?>" class="form-control" required>
           </div>
