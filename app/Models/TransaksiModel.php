@@ -9,16 +9,23 @@ class TransaksiModel extends Model
 	protected $table                = 'm_transaksi';
 	protected $primaryKey           = 'id_transaksi';
 	protected $allowedFields        = [
-		'id_outlet',
-		'id_paket',
+		'kode_invoice',
 		'tgl_transaksi',
-		'total_transaksi',
+		'batas_waktu',
+		'biaya_tambahan',
+		'diskon',
+		'pajak',
+		'total_biaya',
 		'status',
-		'konfirmasi_pembayaran',
+		'konfirmasi',
+		'id_outlet',
+		'id_member',
 		'id_user',
 	];
 
 	protected $useTimestamps        = true;
 	protected $dateFormat           = 'datetime';
 	protected $createdField         = 'tgl_transaksi';
+	protected $updatedField         = '';
+	protected $deletedField         = '';
 }

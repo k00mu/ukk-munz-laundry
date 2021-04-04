@@ -38,7 +38,9 @@ $routes->get('/auth', 'Auth::index');
 
 // Transaksi
 $routes->get('/transaksi/tambah', 'Transaksi::add');
-$routes->get('paket/(:num)', 'Paket::getPrice/$1');
+$routes->get('paket/(:num)', 'Paket::getPaket/$1');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

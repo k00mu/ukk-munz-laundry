@@ -52,7 +52,7 @@
                         <span>Rp</span>
                       </div>
                       <div class="col-sm-8 text-right">
-                        <?= number_format('1000', 2, ',', '.') ?>
+                        <?= number_format($t['total_biaya'], 2, ',', '.') ?>
                       </div>
                     </div>
                   </td>

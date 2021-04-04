@@ -52,7 +52,8 @@ class Paket extends BaseController
 		session()->setFlashdata('delete', 'Paket berhasil dihapus!');
 		return redirect()->to('/paket');
 	}
-	public function getPrice($id)
+
+	public function getPaket($id)
 	{
 		return json_encode($this->paketModel->where('id_paket', $id)->first());
 	}

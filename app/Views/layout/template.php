@@ -90,8 +90,11 @@
   <script src="\adminlte/plugins/daterangepicker/daterangepicker.js"></script>
   <script src="\adminlte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
-  <!-- Local Script | Alert timeout-->
+  <!-- Local Script -->
   <script>
+    const base_url = '<?= base_url() ?>'
+
+
     window.setTimeout(function() {
       $(".alert").fadeTo(500, 0).slideUp(500, function() {
         $(this).remove();
@@ -127,55 +130,106 @@
       });
     });
 
-    $i = 2;
-    $(document).ready(() => {
-      $("#tambahPaket").click(() => {
-        $("#paket").append(
-          `
-          <tr>
+    function getSubTotal() {
+      let total_biaya = 0;
+      $(document).find('.total_harga').each((index, element) => {
+        total_biaya += Number($(element).val());
+      });
+
+      return total_biaya;
+    }
+
+    $('.btn-tambah-det').click((e) => {
+      e.preventDefault();
+      id_paket = $('.id_paket').val();
+      qty = $('.qty').val();
+
+      $.get(base_url + '/paket/' + id_paket, (response) => {
+        const data = JSON.parse(response);
+        const find = $(document).find('tr[data-id="' + data.id_paket + '"]');
+
+        if (find.length == 0) {
+          $('.paket').append(
+            `
+          <tr data-id="${data.id_paket}">
+            <input type="hidden" name="id_paket[]" value="${data.id_paket}">
+            <td>${data.nama_paket}</td>
+            <td>${data.harga_paket}</td>
             <td>
-              ${
-                $i++
-              }
+              <input readonly class="form-control" name="qty[]" value="${qty}">
             </td>
             <td>
-              <select name="nama_paket" class="form-control form-control-sm" required>
-                <option value="">-</option>
-              </select>
-            </td>
-            <td>
-              <input class="form-control form-control-sm" required>
-            </td>
-            <td>
-              <input class="form-control form-control-sm bg-light" disabled>
-            </td>
-            <td>
-              <input class="form-control form-control-sm bg-light" disabled>
+              <input readonly class="form-control total_harga" name="total_harga[]" value="${data.harga_paket * qty}">
             </td>
             <td>
               <div class="text-center">
-                <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete">
+                <a class="btn btn-danger btn-sm btn-hapus">
                   <i class="fas fa-trash"></i>
                 </a>
               </div>
             </td>
           </tr>
           `
-        )
-      })
+          );
+        }
 
-      $(".item-paket").each(function() {
-        let d;
-        $(this).click(function() {
-          $.get("../paket/" + $(this).val(), function(data, status) {
-            d = JSON.parse(data);
-            // alert("Data: " + d.harga_paket + "\nStatus: " + status);
-            alert(d.harga_paket);
-          });
-        });
-
+        $('.total_biaya').val(getSubTotal());
       });
     });
+
+    $(document).on('click', '.btn-hapus', function() {
+      $(this).closest('tr').remove();
+      $('.total_bayar').val(getSubTotal());
+    });
+
+    $('.biaya_tambahan').keyup(() => {
+      biaya_tambahan = $('.biaya_tambahan').val();
+      total_biaya = getSubTotal();
+
+      $('.total_biaya').val(Number(total_biaya) + (Number(biaya_tambahan)))
+    });
+
+    $('.pajak').keyup(() => {
+      pajak = $('.pajak').val();
+      total_biaya = getSubTotal();
+      ppajak = (Number(pajak) / 100) * Number(total_biaya)
+
+      $('.total_biaya').val(Number(total_biaya) + Number(ppajak))
+    });
+
+    $('.diskon').keyup(() => {
+      diskon = $('.diskon').val();
+      pajak = $('.pajak').val();
+      total_biaya = getSubTotal();
+
+      pdiskon = (Number(diskon) / 100) * Number(total_biaya)
+
+      $('.total_biaya').val(Number(total_biaya) + Number(ppajak) - Number(pdiskon))
+    });
+
+    // $("[name='biaya_tambahan']").change((e) => {
+    //   e.preventDefault();
+    //   let curPrice = $("[name='biaya_paket']").val();
+    //   let addPrice = $("[name='biaya_tambahan']").val();
+
+    //   $("[name='total_biaya']").val(Number(curPrice) + Number(addPrice));
+    // });
+
+    // $("[name='diskon']").change((e) => {
+    //   e.preventDefault();
+    //   let total = $("[name='total_biaya']").val();
+    //   let diskon = $("[name='diskon']").val();
+
+    //   $("[name='total_biaya']").val((Number(total) - (Number(total) * (Number(diskon) / 100))).toFixed(2));
+    // });
+
+    // $("[name='pajak']").change((e) => {
+    //   e.preventDefault();
+    //   let total = $("[name='total_biaya']").val();
+    //   let pajak = $("[name='pajak']").val();
+
+    //   $("[name='total_biaya']").val((Number(total) + (Number(total) * (Number(pajak) / 100))).toFixed(2));
+    // });
   </script>
 </body>
 
