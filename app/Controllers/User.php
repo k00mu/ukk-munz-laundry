@@ -52,7 +52,4 @@ class User extends BaseController
     session()->setFlashdata('delete', 'User berhasil dihapus!');
     return redirect()->to('/user');
   }
-
-  //--------------------------------------------------------------------
-
 }

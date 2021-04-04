@@ -12,8 +12,9 @@ class UserModel extends Model
 
   public function userData()
   {
-    return $this->db->table('m_user')
+    return $this
       ->join('m_outlet', 'm_outlet.id_outlet = m_user.id_outlet')
+      ->orderBy('role', 'asc')
       ->get()->getResultArray();
   }
 }

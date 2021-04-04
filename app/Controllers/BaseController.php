@@ -50,5 +50,7 @@ class BaseController extends Controller
 		$this->userModel = new \App\Models\UserModel();
 		$this->outletModel = new \App\Models\OutletModel();
 		$this->memberModel = new \App\Models\MemberModel();
+		$this->paketModel = new \App\Models\PaketModel();
+		$this->transaksiModel = new \App\Models\TransaksiModel();
 	}
 }

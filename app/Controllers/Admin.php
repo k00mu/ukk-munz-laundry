@@ -11,7 +11,4 @@ class Admin extends BaseController
     ];
     return view('home', $data);
   }
-
-  //--------------------------------------------------------------------
-
 }

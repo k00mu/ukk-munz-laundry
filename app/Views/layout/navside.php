@@ -9,20 +9,32 @@
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
+    <?php if (!session()->get('username') == "") { ?>
 
-    <!-- User Menu -->
-    <li class="nav-item dropdown">
-      <a class="nav-link" data-toggle="dropdown">
-        <span class="mr-2 d-none d-lg-inline text-gray-600"><?= session()->get('nama_user'); ?> (<?= session()->get('role') ?>)</span>
-        <i class="fas fa-user"></i>
-      </a>
-      <div class="dropdown-menu dropdown-menu-sm-right text-center">
-        <a href="/auth/logout" class="dropdown-item">
-          <i class="fas fa-sign-out-alt"></i>
-          Keluar
+      <!-- User Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown">
+          <span class="mr-2 d-none d-lg-inline text-gray-600"><?= session()->get('nama_user'); ?> (<?= session()->get('role') ?>)</span>
+          <i class="fas fa-user"></i>
         </a>
-      </div>
-    </li>
+        <div class="dropdown-menu dropdown-menu-sm-right text-center">
+          <a href="/auth/logout" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            Keluar
+          </a>
+        </div>
+      </li>
+
+    <?php } else { ?>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/auth" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </a>
+      </li>
+
+    <?php } ?>
   </ul>
 </nav>
 <!-- /.navbar -->
@@ -52,14 +64,12 @@
             </p>
           </a>
         </li>
-        <li class="nav-header">KASIR</li>
         <li class="nav-item">
           <a href="/transaksi" class="nav-link">
             <i class="nav-icon far fa-handshake"></i>
             <p class="text">Transaksi</p>
           </a>
         </li>
-        <li class="nav-header">ADMIN</li>
         <li class="nav-item">
           <a href="/outlet" class="nav-link">
             <i class="nav-icon fas fa-store-alt"></i>
@@ -84,18 +94,16 @@
             <p class="text">Akun</p>
           </a>
         </li>
-        <li class="nav-header">OWNER</li>
         <li class="nav-item">
           <a href="/laporan" class="nav-link">
             <i class="nav-icon fas fa-print"></i>
             <p class="text">Laporan</p>
           </a>
         </li>
-        <li class="nav-header">TAMBAHAN</li>
         <li class="nav-item">
           <a href="/laporan" class="nav-link">
             <i class="nav-icon fa fa-history"></i>
-            <p class="text">Riwayat Perubahan</p>
+            <p class="text">Riwayat</p>
           </a>
         </li>
       </ul>

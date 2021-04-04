@@ -4,18 +4,13 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-10">
-        <h1><?= $title; ?></h1>
-      </div>
-      <div class="col-sm">
-        <button type="button" class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#add">
-          <i class="fa fa-plus mr-2"></i>Tambah Outlet
-        </button>
-      </div>
+  <div class=" container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between">
+      <h1 class="h3 mb-0"><?= $title; ?></h1>
+      <a class="d-none d-sm-inline-block btn btn-sm btn-outline-dark shadow-sm" data-toggle="modal" data-target="#add">
+        <i class="fa fa-plus mr-2"></i>Tambah Outlet
+      </a>
     </div>
-
   </div><!-- /.container-fluid -->
 </section>
 
@@ -53,7 +48,7 @@
       <table class="table table-striped projects">
         <thead>
           <tr>
-            <th style="width: 1%">ID</th>
+            <th style="width: 1%">#</th>
             <th>Nama Outlet</th>
             <th>Alamat</th>
             <th>Telepon</th>
@@ -62,14 +57,17 @@
         </thead>
         <tbody>
 
-          <?php foreach ($outlet as $o) : ?>
+          <?php
+          $i = 1;
+          foreach ($outlet as $o) :
+          ?>
             <tr>
-              <td class="text-center"><?= $o['id_outlet'] ?></td>
+              <td class="text-center"><?= $i++ ?></td>
               <td><?= $o['nama_outlet'] ?></td>
               <td><?= $o['alamat_outlet'] ?></td>
               <td><?= $o['telp_outlet'] ?></td>
 
-              <td class="project-actions text-center">
+              <td class="project-actions text-right">
                 <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit<?= $o['id_outlet'] ?>">
                   <i class="fas fa-pencil-alt"></i>
                   Edit

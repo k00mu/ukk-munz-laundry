@@ -58,6 +58,7 @@ class Auth extends BaseController
 				session()->set('nama_user', $check['nama_user']);
 				session()->set('username', $check['username']);
 				session()->set('role', $check['role']);
+				session()->set('id_outlet', $check['id_outlet']);
 
 				$role = $check['role'];
 				// Account level
@@ -90,9 +91,6 @@ class Auth extends BaseController
 		session()->remove('username');
 		session()->remove('role');
 		session()->setFlashdata('message', 'Logout berhasil!');
-		return redirect()->to(base_url(''));
+		return redirect()->to('/');
 	}
-
-	//--------------------------------------------------------------------
-
 }

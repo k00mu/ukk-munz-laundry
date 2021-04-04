@@ -4,18 +4,13 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-10">
-        <h1><?= $title; ?></h1>
-      </div>
-      <div class="col-sm">
-        <button type="button" class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#add">
-          <i class="fa fa-plus mr-2"></i>Tambah Member
-        </button>
-      </div>
+  <div class=" container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between">
+      <h1 class="h3 mb-0"><?= $title; ?></h1>
+      <a class="d-none d-sm-inline-block btn btn-sm btn-outline-dark shadow-sm" data-toggle="modal" data-target="#add">
+        <i class="fa fa-plus mr-2"></i>Tambah Member
+      </a>
     </div>
-
   </div><!-- /.container-fluid -->
 </section>
 
@@ -53,7 +48,7 @@
       <table class="table table-striped projects">
         <thead>
           <tr>
-            <th style="width: 1%">ID</th>
+            <th style="width: 1%">#</th>
             <th>Nama</th>
             <th>Alamat</th>
             <th>Jenis Kelamin</th>
@@ -63,12 +58,14 @@
         </thead>
         <tbody>
 
-          <?php foreach ($member as $m) : ?>
+          <?php
+          $i = 1;
+          foreach ($member as $m) : ?>
             <tr>
-              <td class="text-center"><?= $m['id_member'] ?></td>
-              <td class="text-center"><?= $m['nama_member'] ?></td>
+              <td class="text-center"><?= $i++ ?></td>
+              <td><?= $m['nama_member'] ?></td>
               <td><?= $m['alamat_member'] ?></td>
-              <td><?= $m['jenis_kelamin'] ?></td>
+              <td><?= ucwords($m['jenis_kelamin']) ?></td>
               <td><?= $m['telp_member'] ?></td>
 
               <td class="project-actions text-center">

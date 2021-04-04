@@ -36,6 +36,9 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Auth::index');
 $routes->get('/auth', 'Auth::index');
 
+// Transaksi
+$routes->get('/transaksi/tambah', 'Transaksi::add');
+$routes->get('paket/(:num)', 'Paket::getPrice/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
