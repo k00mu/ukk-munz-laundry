@@ -12,5 +12,6 @@ class DetailModel extends Model
 		'id_transaksi',
 		'id_paket',
 		'qty',
+		'total_harga',
 	];
 }

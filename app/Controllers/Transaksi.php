@@ -44,7 +44,6 @@ class Transaksi extends BaseController
 	{
 		$dataTransaksi = [
 			'kode_invoice' => $this->request->getVar('kode_invoice'),
-			'kode_invoice' => $this->request->getVar('kode_invoice'),
 			'id_member' => $this->request->getVar('id_member'),
 			'batas_waktu' => $this->request->getVar('batas_waktu'),
 			'biaya_tambahan' => $this->request->getVar('biaya_tambahan'),
@@ -56,19 +55,23 @@ class Transaksi extends BaseController
 			'id_outlet' => session()->get('id_outlet'),
 			'id_user' => session()->get('id_user'),
 		];
+		$this->transaksiModel->insert($dataTransaksi);
 
-		for ($i = 0; $i < $this->request->getVar('id_paket'); $i++) {
-			$data = [
-				'id_detail' => $this->request->insertID('m_detail_transaksi', 'id_detail'),
-				'id_transaksi' => $this->request->insertID('m_transaksi', 'id_transaksi'),
-				'id_paket' => $this->request->getVar(`id_paket[$i]`),
-				'qty' => $this->request->getVar(`qty[$i]`),
-				'total_harga' => $this->request->getVar(`total_harga[$i]`),
+		$id_transaksi = $this->transaksiModel->insertID();
+
+		for ($i = 0; $i < count($this->request->getVar('id_paket')); $i++) {
+			$dataDetail = [
+				'id_transaksi' => $id_transaksi,
+				'id_paket' => $this->request->getVar('id_paket[' . $i . ']'),
+				'qty' => $this->request->getVar('qty[' . $i . ']'),
+				'total_harga' => $this->request->getVar('total_harga[' . $i . ']'),
+
 			];
+			$this->detailModel->insert($dataDetail);
 		}
 
-		$this->transaksiModel->save($dataTransaksi);
-		$this->detailModel->save($dataDetail);
+
+
 		session()->setFlashdata('message', 'Pesanan berhasil ditambahkan!');
 		return redirect()->to('/transaksi');
 	}

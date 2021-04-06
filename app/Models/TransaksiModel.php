@@ -18,6 +18,7 @@ class TransaksiModel extends Model
 		'total_biaya',
 		'status',
 		'konfirmasi',
+		'total_biaya',
 		'id_outlet',
 		'id_member',
 		'id_user',
